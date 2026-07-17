@@ -1,0 +1,74 @@
+openapi: 3.1.0
+
+info:
+  title: ShopVerse API Gateway
+  description: API Gateway for ShopVerse Microservices Platform
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+
+  /:
+    get:
+      summary: Gateway Information
+      responses:
+        '200':
+          description: Success
+
+  /health:
+    get:
+      summary: Health Check
+      responses:
+        '200':
+          description: Healthy
+
+  /ready:
+    get:
+      summary: Readiness Check
+      responses:
+        '200':
+          description: Ready
+
+  /info:
+    get:
+      summary: Service Information
+      responses:
+        '200':
+          description: Service metadata
+
+  /api/v1/auth:
+    get:
+      summary: Authentication placeholder
+      responses:
+        '200':
+          description: Success
+
+  /api/v1/products:
+    get:
+      summary: Products placeholder
+      responses:
+        '200':
+          description: Success
+
+  /api/v1/inventory:
+    get:
+      summary: Inventory placeholder
+      responses:
+        '200':
+          description: Success
+
+  /api/v1/orders:
+    get:
+      summary: Orders placeholder
+      responses:
+        '200':
+          description: Success
+
+  /api/v1/notifications:
+    get:
+      summary: Notifications placeholder
+      responses:
+        '200':
+          description: Success
