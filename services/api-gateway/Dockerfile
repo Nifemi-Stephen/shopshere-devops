@@ -1,5 +1,5 @@
 # Use Node.js 22 LTS on Alpine Linux
-FROM node:22-alpine
+FROM node:24-alpine
 
 # Create the application directory
 WORKDIR /usr/src/app
