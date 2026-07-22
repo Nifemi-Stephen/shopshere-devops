@@ -1,0 +1,55 @@
+services:
+  auth-postgres:
+    image: postgres:17-alpine
+    container_name: auth-postgres
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - auth-postgres-data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shopverse -d authdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: auth-service
+
+    restart: unless-stopped
+
+    depends_on:
+      auth-postgres:
+        condition: service_healthy
+
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      APP_VERSION: 1.0.0
+
+      DATABASE_URL: ${DATABASE_URL}
+
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
+      REFRESH_TOKEN_EXPIRES_IN: ${REFRESH_TOKEN_EXPIRES_IN}
+
+      CORS_ORIGIN: ${CORS_ORIGIN}
+
+    ports:
+      - "3001:3001"
+
+volumes:
+  auth-postgres-data:

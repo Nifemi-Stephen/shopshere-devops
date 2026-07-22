@@ -1,0 +1,33 @@
+openapi: 3.0.3
+
+info:
+  title: ShopVerse Auth Service API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3001
+
+paths:
+  /health:
+    get:
+      summary: Health Check
+
+      responses:
+        "200":
+          description: Service Healthy
+
+  /api/auth/register:
+    post:
+      summary: Register User
+
+  /api/auth/login:
+    post:
+      summary: Login User
+
+  /api/auth/logout:
+    post:
+      summary: Logout User
+
+  /api/auth/me:
+    get:
+      summary: Current User
